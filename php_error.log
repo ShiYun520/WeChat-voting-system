@@ -1,0 +1,2 @@
+[27-Mar-2025 13:51:10 PRC] PHP Warning:  require_once(./include/db_config.php): failed to open stream: No such file or directory in /www/wwwroot/fz.torgw.cc/vote_ajax.php on line 16
+[27-Mar-2025 13:51:10 PRC] PHP Fatal error:  require_once(): Failed opening required './include/db_config.php' (include_path='.:/www/server/php/72/lib/php') in /www/wwwroot/fz.torgw.cc/vote_ajax.php on line 16

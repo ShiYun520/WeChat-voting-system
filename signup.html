@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 报名表单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 70px; /* 为底部导航留出空间 */
+        }
+        
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to bottom, #8c2e2e, #922424);
+            overflow: hidden;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .banner-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(129, 39, 39, 0.9);
+            z-index: 1;
+        }
+        
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .banner-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 30px 0 15px;
+            color: #f9e4bf;
+        }
+        
+        .banner-subtitle {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #f9e4bf;
+        }
+        
+        .banner-text {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+        }
+        
+        .dot.active {
+            background-color: #fff;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: -50px auto 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .required {
+            color: #e02020;
+            margin-right: 5px;
+        }
+        
+        .form-control {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 0 15px;
+            font-size: 16px;
+        }
+        
+        textarea.form-control {
+            height: 120px;
+            padding: 10px 15px;
+            resize: none;
+        }
+        
+        .upload-box {
+            border: 1px dashed #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .upload-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .upload-text {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .upload-note {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+        
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .preview-item {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .preview-remove {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .btn-submit {
+            display: block;
+            width: 100%;
+            height: 50px;
+            background-color: #c14a43;
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #a53f39;
+        }
+        
+        .message {
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .success-message {
+            background-color: #e7f8e9;
+            color: #1a8d49;
+            border: 1px solid #b8e1c3;
+        }
+        
+        .error-message {
+            background-color: #fde9e9;
+            color: #e02020;
+            border: 1px solid #f7caca;
+        }
+
+        /* 适应移动设备 */
+        @media (max-width: 768px) {
+            .banner {
+                height: 250px;
+            }
+            
+            .banner-title {
+                font-size: 28px;
+            }
+            
+            .banner-subtitle {
+                font-size: 20px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+        }
+
+        /* 添加动画元素 */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23fff" fill-opacity="1" d="M0,160L48,138.7C96,117,192,75,288,80C384,85,480,139,576,160C672,181,768,171,864,149.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+        }
+
+        .character {
+            position: absolute;
+            bottom: 40px;
+            left: 50px;
+            width: 80px;
+            height: 80px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .birds {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            width: 100px;
+            height: 30px;
+            animation: fly 10s linear infinite;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateX(100px);
+            }
+            100% {
+                transform: translateX(-300px);
+            }
+        }
+
+        .comment-bubble {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        /* 底部导航 */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+            display: flex;
+            z-index: 90;
+        }
+        
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #8E8E93;
+            font-size: 10px;
+        }
+        
+        .tab-item.active {
+            color: #007AFF;
+        }
+        
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        
+        /* 添加超链接样式 */
+        .tab-item a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="banner-bg"></div>
+        <div class="comment-bubble">加油👍有志者事竟成</div>
+        <div class="birds">🕊️🕊️🕊️</div>
+        <div class="banner-content">
+            <h1 class="banner-title"><?php echo htmlspecialchars($contest_name); ?></h1>
+            <h2 class="banner-subtitle">照亮童年振兴梦</h2>
+            <p class="banner-text">——富体月榜挑战赛内公益主题活动</p>
+            <p>桂林师范学院三月三不连放</p>
+        </div>
+        <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+        <div class="wave"></div>
+        <div class="character" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="200" fill="%23FFD700"/><circle cx="180" cy="180" r="30" fill="%23000"/><circle cx="330" cy="180" r="30" fill="%23000"/><path d="M180,280 Q256,340 330,280" stroke="%23000" stroke-width="10" fill="none"/></svg>');"></div>
+    </div>
+
+    <div class="form-container">
+        <?php if (!empty($successMessage)): ?>
+        <div class="message success-message"><?php echo htmlspecialchars($successMessage); ?></div>
+        <?php endif; ?>
+        
+        <?php if (!empty($errorMessage)): ?>
+        <div class="message error-message"><?php echo htmlspecialchars($errorMessage); ?></div>
+        <?php endif; ?>
+        
+        <form id="registrationForm" action="signup.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="form-label"><span class="required">*</span>姓名</label>
+                <input type="text" name="name" class="form-control" placeholder="请输入姓名" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label"><span class="required">*</span>手机号</label>
+                <input type="tel" name="phone" class="form-control" placeholder="仅用于活动联系" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label"><span class="required">*</span>学院</label>
+                <input type="text" name="college" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label"><span class="required">*</span>班级</label>
+                <input type="text" name="class" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label"><span class="required">*</span>班级名称</label>
+                <input type="text" name="class_name" class="form-control" placeholder="请输入班级名称" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label"><span class="required">*</span>学号</label>
+                <input type="text" name="student_id" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">寄语（对留守儿童鼓励的一段话或者激励自己的励志语）</label>
+                <textarea name="message" class="form-control" placeholder="请输入寄语（对留守儿童鼓励的一段话或者激励自己的励志语）"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label"><span class="required">*</span>封面</label>
+                <p class="upload-text" style="margin-bottom: 5px;">可上传相关照片!</p>
+                <div class="upload-box" id="coverUploadBox">
+                    <!-- 修改这一行，使用position和opacity而不是display:none -->
+                    <input type="file" name="cover_photo" id="coverUpload" accept="image/*" style="position: absolute; opacity: 0; width: 100%; height: 100%; top: 0; left: 0; cursor: pointer;" required>
+                    <div class="upload-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="24" height="24" fill="none"/>
+                            <path d="M21 19V5C21 3.9 20.1 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19ZM8.5 13.5L11 16.51L14.5 12L19 18H5L8.5 13.5Z" fill="#999999"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="coverPreview" class="preview-container"></div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">照片(1-5张)</label>
+                <p class="upload-text" style="margin-bottom: 5px;">上传1-5张活动的相关照片，照片可选择。请不要上传和活动无关的照片！</p>
+                <div class="upload-box" id="photosUploadBox">
+                    <!-- 为了保持一致，也修改多图上传的输入框 -->
+                    <input type="file" name="photos[]" id="photosUpload" accept="image/*" multiple style="position: absolute; opacity: 0; width: 100%; height: 100%; top: 0; left: 0; cursor: pointer;">
+                    <div class="upload-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="24" height="24" fill="none"/>
+                            <path d="M21 19V5C21 3.9 20.1 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19ZM8.5 13.5L11 16.51L14.5 12L19 18H5L8.5 13.5Z" fill="#999999"/>
+                        </svg>
+                    </div>
+                </div>
+                <div id="photosPreview" class="preview-container"></div>
+            </div>
+            
+            <button type="submit" class="btn-submit">确定报名</button>
+        </form>
+    </div>
+    
+    <!-- 底部导航 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <a href="index.php">
+                <div class="tab-icon">🏠</div>
+                <div>首页</div>
+            </a>
+        </div>
+        <div class="tab-item">
+            <a href="top.php">
+                <div class="tab-icon">🏆</div>
+                <div>排行榜</div>
+            </a>
+        </div>
+        <div class="tab-item">
+            <a href="#">
+                <div class="tab-icon">👍</div>
+                <div>点赞</div>
+            </a>
+        </div>
+        <div class="tab-item active">
+            <a href="signup.html">
+                <div class="tab-icon">📝</div>
+                <div>报名</div>
+            </a>
+        </div>
+        <div class="tab-item">
+            <a href="prize.php">
+                <div class="tab-icon">🎁</div>
+                <div>奖品</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 图片预览功能
+        document.getElementById('coverUpload').addEventListener('change', function(e) {
+            const preview = document.getElementById('coverPreview');
+            preview.innerHTML = '';
+            
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'preview-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    
+                    const removeBtn = document.createElement('div');
+                    removeBtn.className = 'preview-remove';
+                    removeBtn.innerHTML = 'x';
+                    removeBtn.addEventListener('click', function() {
+                        document.getElementById('coverUpload').value = '';
+                        preview.innerHTML = '';
+                    });
+                    
+                    previewItem.appendChild(img);
+                    previewItem.appendChild(removeBtn);
+                    preview.appendChild(previewItem);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+        
+        document.getElementById('photosUpload').addEventListener('change', function(e) {
+            const preview = document.getElementById('photosPreview');
+            preview.innerHTML = '';
+            
+            if (this.files) {
+                const maxFiles = 5;
+                const filesCount = this.files.length > maxFiles ? maxFiles : this.files.length;
+                
+                for (let i = 0; i < filesCount; i++) {
+                    const file = this.files[i];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const previewItem = document.createElement('div');
+                        previewItem.className = 'preview-item';
+                        
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        
+                        previewItem.appendChild(img);
+                        preview.appendChild(previewItem);
+                    }
+                    
+                    reader.readAsDataURL(file);
+                }
+                
+                if (this.files.length > maxFiles) {
+                    alert('最多只能上传5张照片，系统将只处理前5张。');
+                }
+            }
+        });
+        
+        // 倒计时功能
+        function updateCountdown() {
+            const endDate = new Date("<?php echo date('Y-m-d H:i:s', strtotime($countdown['endDate'])); ?>").getTime();
+            const now = new Date().getTime();
+            const distance = endDate - now;
+            
+            if (distance < 0) {
+                document.querySelector('.zdjs').innerHTML = '<span class="h1">活动已结束</span>';
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // 如果页面上有倒计时元素则更新
+            const countdownElements = document.querySelectorAll('.zdjs');
+            if (countdownElements.length > 0) {
+                document.getElementById("DD").innerHTML = days;
+                document.getElementById("HH").innerHTML = hours;
+                document.getElementById("MM").innerHTML = minutes;
+                document.getElementById("SS").innerHTML = seconds;
+            }
+        }
+        
+        // 每秒更新一次
+        setInterval(updateCountdown, 1000);
+        
+        // 表单验证
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            const requiredFields = ['name', 'phone', 'college', 'class', 'class_name', 'student_id'];
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                const input = this.querySelector(`[name="${field}"]`);
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#e02020';
+                } else {
+                    input.style.borderColor = '#ddd';
+                }
+            });
+            
+            const coverUpload = document.getElementById('coverUpload');
+            if (!coverUpload.files || coverUpload.files.length === 0) {
+                isValid = false;
+                document.getElementById('coverUploadBox').style.borderColor = '#e02020';
+            } else {
+                document.getElementById('coverUploadBox').style.borderColor = '#ddd';
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('请填写所有必填字段并上传封面照片！');
+            }
+        });
+    </script>
+</body>
+</html>

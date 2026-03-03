@@ -1,0 +1,54 @@
+[27-Mar-2025 13:53:16 PRC] Vote Error: 数据库配置文件不存在
+[27-Mar-2025 13:53:44 PRC] Vote Error: 数据库配置文件不存在
+[27-Mar-2025 13:54:20 PRC] Vote Error: 数据库配置文件不存在
+[27-Mar-2025 13:56:26 PRC] Vote Error: 数据库连接函数不存在
+[27-Mar-2025 13:58:10 PRC] Vote Error: 数据库配置文件不存在
+[27-Mar-2025 17:57:06 PRC] Vote Error: 数据库连接函数不存在
+[27-Mar-2025 17:58:30 PRC] Vote Error: 数据库连接函数不存在
+[27-Mar-2025 18:00:36 PRC] 已定义的变量:
+db_config_path = /www/wwwroot/fz.torgw.cc/includes/db_config.php
+
+[27-Mar-2025 18:00:36 PRC] Vote Error: 找不到数据库连接信息，请检查配置文件
+[27-Mar-2025 18:02:13 PRC] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::bind_param() in /www/wwwroot/fz.torgw.cc/vote_ajax.php:78
+Stack trace:
+#0 {main}
+
+Next Error: Call to undefined method PDOStatement::close() in /www/wwwroot/fz.torgw.cc/vote_ajax.php:140
+Stack trace:
+#0 {main}
+  thrown in /www/wwwroot/fz.torgw.cc/vote_ajax.php on line 140
+[27-Mar-2025 18:02:28 PRC] PHP Fatal error:  Uncaught Error: Call to undefined method PDOStatement::bind_param() in /www/wwwroot/fz.torgw.cc/vote_ajax.php:78
+Stack trace:
+#0 {main}
+
+Next Error: Call to undefined method PDOStatement::close() in /www/wwwroot/fz.torgw.cc/vote_ajax.php:140
+Stack trace:
+#0 {main}
+  thrown in /www/wwwroot/fz.torgw.cc/vote_ajax.php on line 140
+[27-Mar-2025 18:03:24 PRC] PHP Fatal error:  Uncaught Error: Call to a member function bind_param() on boolean in /www/wwwroot/fz.torgw.cc/vote_ajax.php:65
+Stack trace:
+#0 {main}
+  thrown in /www/wwwroot/fz.torgw.cc/vote_ajax.php on line 65
+[27-Mar-2025 18:05:15 PRC] Vote Error: 数据库操作失败
+[27-Mar-2025 18:06:16 PRC] Vote Error: 数据库操作失败
+[27-Mar-2025 18:06:42 PRC] Vote Error: 数据库操作失败
+[27-Mar-2025 18:17:16 PRC] Vote Error: 数据库操作失败
+[27-Mar-2025 18:31:17 PRC] Vote Error: 数据库操作失败
+[27-Mar-2025 18:31:52 PRC] Vote Error: 数据库操作失败
+[27-Mar-2025 18:32:56 PRC] Votes表结构: id, contestant_id, ip_address, device_id, created_at, vote_date, vote_value, user_id, session_id, vote_source
+[27-Mar-2025 18:32:56 PRC] Vote Error: 数据库操作准备失败: Unknown column 'user_agent' in 'field list'
+[27-Mar-2025 18:34:37 PRC] Vote Error: 数据库操作准备失败: The value specified for generated column 'vote_date' in table 'votes' is not allowed.
+[27-Mar-2025 18:36:10 PRC] PHP Warning:  mysqli_stmt::bind_param(): Couldn't fetch mysqli_stmt in /www/wwwroot/fz.torgw.cc/vote_ajax.php on line 83
+[27-Mar-2025 18:36:10 PRC] PHP Warning:  mysqli_stmt::execute(): Couldn't fetch mysqli_stmt in /www/wwwroot/fz.torgw.cc/vote_ajax.php on line 85
+[27-Mar-2025 18:36:10 PRC] PHP Warning:  main(): Couldn't fetch mysqli_stmt in /www/wwwroot/fz.torgw.cc/vote_ajax.php on line 86
+[27-Mar-2025 18:36:10 PRC] Vote Error: 投票失败，请稍后再试: 
+[27-Mar-2025 18:37:12 PRC] PHP Warning:  mysqli_stmt::bind_param(): Number of elements in type definition string doesn't match number of bind variables in /www/wwwroot/fz.torgw.cc/vote_ajax.php on line 91
+[27-Mar-2025 18:37:12 PRC] Vote Error: 投票失败，请稍后再试: No data supplied for parameters in prepared statement
+[27-Mar-2025 18:38:41 PRC] Vote Error: 您今天已经为该选手点赞过了
+[27-Mar-2025 18:39:47 PRC] Vote Error: 您今天已经为该选手点赞过了
+[27-Mar-2025 18:52:01 PRC] Vote Error: 您今天已经为该选手点赞过了
+[27-Mar-2025 18:59:10 PRC] Vote Error: 您今天已经为该选手点赞过了
+[27-Mar-2025 18:59:22 PRC] Vote Error: 您今天已经为该选手点赞过了
+[27-Mar-2025 19:02:40 PRC] Vote Error: 您今天已经为该选手点赞过了
+[27-Mar-2025 19:02:58 PRC] Vote Error: 您今天已经为该选手点赞过了
+[27-Mar-2025 19:05:39 PRC] Vote Error: 您今天已经为该选手点赞过了
